@@ -1,0 +1,12 @@
+{
+  "name": "AmplifEye",
+  "displayName": "AmplifEye",
+  "expo": {
+    "name": "AmplifEye",
+    "slug": "AmplifEye",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
