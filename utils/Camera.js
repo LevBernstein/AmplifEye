@@ -5,7 +5,12 @@ const Vid = (props) => {
   const videoRef = useRef(null)
   const photoRef = useRef(null)
   const constraints = {
-    video: { facingMode: 'environment', framerate: { ideal: 60, max: 120 } }
+    video: {
+      facingMode: 'environment',
+      framerate: { ideal: 60, max: 120 },
+      width: { ideal: 4096 },
+      height: { ideal: 2160 } //kind of hacky but uses ideal to force the video to display in the camera's max resolution
+    }
   }
   // TODO: method to change constraints facingMode: user or environment
   useEffect(() => {
@@ -35,8 +40,8 @@ const Vid = (props) => {
     let video = videoRef.current
     let photo = photoRef.current
     let ctx = photo.getContext('2d')
-    const width = window.innerWidth
-    const height = window.innerHeight - 4 // TODO: check how innerHeight behaves on mobile vs window.screen.availHeight
+    const width = video.videoWidth
+    const height = video.videoHeight
     photo.width = width
     photo.height = height
     return setInterval(() => {

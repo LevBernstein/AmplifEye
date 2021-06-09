@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { useEffect, useRef } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Vid from './Camera.js'
+import Vid from './utils/Camera.js'
 
 export default function App() {
   return (
