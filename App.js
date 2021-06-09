@@ -7,7 +7,7 @@ import Vid from './Camera.js'
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.Text}>AmplifEye!</Text>
+      <Text style={styles.Text}></Text>
       <StatusBar style="auto" />
       <Vid />
     </View>
