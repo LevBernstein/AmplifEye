@@ -50,14 +50,17 @@ const Vid = (props) => {
       let pixels = ctx.getImageData(0, 0, width, height)
       let l = pixels.data.length / 4
       for (var i = 0; i < l; i++) {
+        const red = i * 4
+        const green = i * 4 + 1
+        const blue = i * 4 + 2
         if (
-          pixels.data[i * 4] - pixels.data[i * 4 + 1] > 30 &&
-          pixels.data[i * 4] - pixels.data[i * 4 + 2] > 30
+          pixels.data[red] - pixels.data[green] > 30 &&
+          pixels.data[red] - pixels.data[blue] > 30
         ) {
-          pixels.data[i * 4] = 0
-          pixels.data[i * 4 + 1] = pixels.data[i * 4 + 1]
-          pixels.data[i * 4 + 2] =
-            pixels.data[i * 4 + 2] < 205 ? pixels.data[i * 4 + 2] + 50 : 255
+          pixels.data[red] = 0
+          pixels.data[green] = pixels.data[green]
+          pixels.data[blue] =
+            pixels.data[blue] < 205 ? pixels.data[blue] + 50 : 255
         }
       }
 
