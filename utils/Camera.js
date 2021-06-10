@@ -44,9 +44,27 @@ const Vid = (props) => {
     const height = video.videoHeight
     photo.width = width
     photo.height = height
+
     return setInterval(() => {
       ctx.drawImage(video, 0, 0, width, height)
-      //let pixels = ctx.getImageData(0, 0, width, height)
+      let pixels = ctx.getImageData(0, 0, width, height)
+      let l = pixels.data.length / 4
+      for (var i = 0; i < l; i++) {
+        const red = i * 4
+        const green = i * 4 + 1
+        const blue = i * 4 + 2
+        if (
+          pixels.data[red] - pixels.data[green] > 30 &&
+          pixels.data[red] - pixels.data[blue] > 30
+        ) {
+          pixels.data[red] = 0
+          pixels.data[green] = pixels.data[green]
+          pixels.data[blue] =
+            pixels.data[blue] < 205 ? pixels.data[blue] + 50 : 255
+        }
+      }
+
+      ctx.putImageData(pixels, 0, 0)
     }, 1 / video.framerate) //interval of 16 = 60 fps, good baseline
   }
 
