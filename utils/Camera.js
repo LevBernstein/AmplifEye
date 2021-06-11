@@ -2,6 +2,8 @@ import React from 'react'
 import { useEffect, useRef } from 'react'
 
 const Vid = (props) => {
+  const Algorithm = parseInt(props.Algorithm, 2)
+  console.log('Algorithm: ' + Algorithm)
   const videoRef = useRef(null)
   const photoRef = useRef(null)
   const constraints = {
@@ -14,10 +16,10 @@ const Vid = (props) => {
   }
   // TODO: method to change constraints facingMode: user or environment
   useEffect(() => {
-    getVideo(constraints)
+    getVideo(constraints, Algorithm)
   }, [videoRef])
 
-  const getVideo = (constraints) => {
+  const getVideo = (constraints, Algorithm) => {
     navigator.mediaDevices.getUserMedia =
       navigator.mediaDevices.getUserMedia ||
       navigator.webkitGetUserMedia ||
