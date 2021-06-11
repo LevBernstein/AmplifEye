@@ -21,10 +21,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.Text}></Text>
       <StatusBar style="auto" />
       <div onClick={handleClick}>
-        <Vid style={{ display: 'block' }} Algorithm={algRef.current} />
+        <Vid Algorithm={algRef.current} />
       </div>
       <div className="Interface">
         <GUI disp={showGUI} />
@@ -39,9 +38,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1F1F1',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  Text: {
-    color: '#000000',
-    fontSize: '1.5em'
   }
 })
