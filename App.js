@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Vid from './utils/Camera.js'
-import Interface from './utils/Gui.js'
+import GUI from './utils/Gui.js'
 
 export default function App() {
   const algRef = useRef('101001') //TODO: algorithm encoded based on "prescription"
@@ -27,7 +27,7 @@ export default function App() {
         <Vid style={{ display: 'block' }} Algorithm={algRef.current} />
       </div>
       <div className="Interface">
-        <Interface disp={showGUI} />
+        <GUI disp={showGUI} />
       </div>
     </View>
   )

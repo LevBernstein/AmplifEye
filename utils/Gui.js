@@ -1,7 +1,6 @@
 import React from 'react'
-import { useEffect, useRef } from 'react'
 
-const Interface = (props) => {
+const GUI = (props) => {
   console.log('disp: ' + props.disp)
   if (props.disp == false) {
     return <h1></h1>
@@ -9,4 +8,4 @@ const Interface = (props) => {
   return <h1>GUI placeholder</h1>
 }
 
-export default Interface
+export default GUI
