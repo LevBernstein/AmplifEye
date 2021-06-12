@@ -1,9 +1,8 @@
 import React from 'react'
 
 const GUI = (props) => {
-  console.log('disp: ' + props.disp)
-  if (props.disp == false) {
-    return <h1></h1>
+  if (!props.Disp) {
+    return <p></p>
   }
   return <h1>GUI placeholder</h1>
 }
