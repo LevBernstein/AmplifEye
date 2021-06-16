@@ -1,0 +1,27 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "AmplifEye backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test nyc mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LevBernstein/AmplifEye.git"
+  },
+  "author": "Lev Bernstein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LevBernstein/AmplifEye/issues"
+  },
+  "homepage": "https://github.com/LevBernstein/AmplifEye#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.0",
+    "nodemon": "^2.0.7",
+    "npx": "^10.2.2"
+  }
+}
