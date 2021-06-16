@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useRef } from 'react'
 
 const Vid = (props) => {
-  if (props.Disp) {
+  if (props.disp) {
     return <p></p>
   }
   const Algorithm = parseInt(props.Algorithm, 2)

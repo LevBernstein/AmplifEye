@@ -7,22 +7,67 @@ import Vid from './components/Camera.js'
 
 export default function App() {
   const [alg, setAlg] = useState('10101') //TODO: algorithm encoded based on "prescription"
+
   const [showGUI, setShowGUI] = useState(false)
   const platform = getPlatform()
   console.log(platform)
+
   const handleClick = () => {
-    setAlg(alg + 1)
     console.log(alg)
     setShowGUI(!showGUI)
   }
 
   const GUI = (props) => {
-    if (!props.Disp) {
-      return <></>
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const handleSubmit = (event) => {
+      props.setDisp(!props.disp)
+      event.preventDefault()
     }
+
     return (
       <>
-        <h1>j</h1> <p>e</p>
+        {!props.disp ? (
+          <></>
+        ) : (
+          <div>
+            <form id="guiForm" onSubmit={handleSubmit}>
+              <label className="guiLabel">Email: </label>
+              <input
+                className="inputs"
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <label className="guiLabel">Password: </label>
+              <input
+                className="inputs"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="******"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <label className="guiLabel">Algorithm: </label>
+              <input
+                className="inputs"
+                type="text"
+                id="alg"
+                name="alg"
+                value={props.alg}
+                onChange={(e) => props.setAlg(e.target.value)}
+              />
+              <button type="submit" className="prof-button" form="guiForm">
+                Save
+              </button>
+            </form>
+          </div>
+        )}
       </>
     )
   }
@@ -31,14 +76,19 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <div className="Interface" style={{ display: showGUI ? '' : 'none' }}>
-        <GUI Disp={showGUI} Platform={platform} />
+        <GUI
+          disp={showGUI}
+          setDisp={setShowGUI}
+          alg={alg}
+          setAlg={setAlg}
+          platform={platform}
+        />
       </div>
       <div
         className="Video"
         onClick={handleClick}
-        Disp={showGUI}
         style={{ display: showGUI ? 'none' : '' }}>
-        <Vid Algorithm={alg} Platform={platform} />
+        <Vid disp={showGUI} Algorithm={alg} Platform={platform} />
       </div>
     </View>
   )
