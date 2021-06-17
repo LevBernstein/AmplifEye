@@ -19,9 +19,17 @@
   "homepage": "https://github.com/LevBernstein/AmplifEye#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "chai": "^4.3.4",
+    "cors": "^2.8.5",
+    "express-validator": "^6.12.0",
     "mocha": "^9.0.0",
+    "mongoose": "^5.12.14",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
-    "npx": "^10.2.2"
+    "npx": "^10.2.2",
+    "passport": "^0.4.1",
+    "validator": "^13.6.0"
   }
 }
