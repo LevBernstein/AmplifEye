@@ -5,5 +5,5 @@
 	"jsxBracketSameLine": true,
 	"proseWrap": "preserve",
 	"endOfLine": "lf",
-	"useTabs": false
+	"useTabs": true
 }
