@@ -1,11 +1,12 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
+import Shift from '../utils/Shift.js'
 
 const Vid = (props) => {
   if (props.disp) {
     return <p></p>
   }
-  const Algorithm = parseInt(props.Algorithm, 2)
+  const Algorithm = parseInt(props.Algorithm, 10)
   console.log('Algorithm: ' + Algorithm)
   const videoRef = useRef(null)
   const photoRef = useRef(null)
@@ -58,15 +59,15 @@ const Vid = (props) => {
         const red = i * 4
         const green = i * 4 + 1
         const blue = i * 4 + 2
-        if (
-          pixels.data[red] - pixels.data[green] > 30 &&
-          pixels.data[red] - pixels.data[blue] > 30
-        ) {
-          pixels.data[red] = 0
-          pixels.data[green] = pixels.data[green]
-          pixels.data[blue] =
-            pixels.data[blue] < 205 ? pixels.data[blue] + 50 : 255
-        }
+        let newColors = Shift(
+          0,
+          pixels.data[red],
+          pixels.data[green],
+          pixels.data[blue]
+        )
+        pixels.data[red] = newColors[0]
+        pixels.data[green] = newColors[1]
+        pixels.data[blue] = newColors[2]
       }
 
       ctx.putImageData(pixels, 0, 0)
