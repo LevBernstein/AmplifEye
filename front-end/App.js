@@ -1,14 +1,22 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  SafeAreaView
+} from 'react-native'
 import getPlatform from './utils/Platform.js'
 import Vid from './components/Camera.js'
 
 export default function App() {
-  const [alg, setAlg] = useState('10') //TODO: algorithm encoded based on "prescription"
+  const [alg, setAlg] = useState('0') //TODO: algorithm encoded based on "prescription", re-render video with changed alg.
+  //Need to force an update of Vid or find a more elegant solution
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [pass, setPass] = useState('')
   const [showGUI, setShowGUI] = useState(false)
   const platform = getPlatform()
   console.log(platform)
@@ -26,54 +34,44 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <div className="Interface" style={{ display: showGUI ? '' : 'none' }}>
-        {!showGUI ? (
-          <></>
-        ) : (
-          <form id="guiForm" onSubmit={handleSubmit}>
-            <label className="guiLabel"> Email: </label>
-            <input
-              className="Email"
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <br />
-            <label className="guiLabel"> Password: </label>
-            <input
-              className="Password"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="******"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <br />
-            <label className="guiLabel"> Algorithm: </label>
-            <input
-              className="inputs"
-              type="text"
-              id="alg"
-              name="alg"
-              value={alg}
-              onChange={(e) => setAlg(e.target.value)}
-            />
-            <br />
-            <button type="submit" className="profButton" form="guiForm">
-              Save
-            </button>
-          </form>
-        )}
-      </div>
-      <div
+      <View style={{ display: showGUI ? '' : 'none' }}>
+        <View>
+          <Text>{'\n'}Email: </Text>
+          <TextInput
+            autoCompleteType="email"
+            autoCorrect={false}
+            autoFocus={true}
+            textContentType="emailAddress"
+            placeholder="name@address.com"
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        <View>
+          <Text>{'\n'}Password: </Text>
+          <TextInput
+            autoCompleteType="password"
+            autoCorrect={false}
+            textContentType="password"
+            secureTextEntry={true}
+            placeholder="*******"
+            value={pass}
+            onChangeText={setPass}
+          />
+        </View>
+        <View>
+          <Text>{'\n'}Algorithm: </Text>
+          <TextInput autoCorrect={false} value={alg} onChangeText={setAlg} />
+        </View>
+        <Text>{'\n'}</Text>
+        <Button title="Save" onPress={(e) => handleSubmit(e)} />
+      </View>
+      <View
         className="Video"
         onClick={handleClick}
         style={{ display: showGUI ? 'none' : '' }}>
         <Vid disp={showGUI} Algorithm={alg} Platform={platform} />
-      </div>
+      </View>
     </View>
   )
 }

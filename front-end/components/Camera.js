@@ -1,11 +1,12 @@
 import React from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import Shift from '../utils/Shift.js'
+import { View } from 'react-native'
+//import Canvas from 'react-native-canvas' // has error
+//import { Video, AVPlaybackStatus } from 'expo-av' // does not paint with Paint()
+//TODO: switch to react-native versions of video, canvas
 
 const Vid = (props) => {
-  if (props.disp) {
-    return <p></p>
-  }
   const Algorithm = parseInt(props.Algorithm, 10)
   console.log('Algorithm: ' + Algorithm)
   const videoRef = useRef(null)
@@ -20,10 +21,10 @@ const Vid = (props) => {
   }
   // TODO: method to change constraints facingMode: user or environment
   useEffect(() => {
-    getVideo(constraints, Algorithm)
+    getVideo(constraints)
   }, [videoRef])
 
-  const getVideo = (constraints, Algorithm) => {
+  const getVideo = (constraints) => {
     navigator.mediaDevices.getUserMedia =
       navigator.mediaDevices.getUserMedia ||
       navigator.webkitGetUserMedia ||
@@ -42,7 +43,7 @@ const Vid = (props) => {
       })
   }
 
-  const paint = () => {
+  const Paint = (alg) => {
     let video = videoRef.current
     let photo = photoRef.current
     let ctx = photo.getContext('2d')
@@ -60,7 +61,7 @@ const Vid = (props) => {
         const green = i * 4 + 1
         const blue = i * 4 + 2
         let newColors = Shift(
-          0,
+          alg,
           pixels.data[red],
           pixels.data[green],
           pixels.data[blue]
@@ -75,16 +76,16 @@ const Vid = (props) => {
   }
 
   return (
-    <div>
+    <View>
       <video
-        onCanPlay={() => paint()}
+        onCanPlay={() => Paint(Algorithm)}
         ref={videoRef}
         style={
           { display: 'none' } //extremely inefficient! TODO: find a way around this
         }
       />
       <canvas ref={photoRef} />
-    </div>
+    </View>
   )
 }
 
