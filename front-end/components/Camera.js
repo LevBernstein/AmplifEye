@@ -2,8 +2,7 @@ import React from 'react'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import Shift from '../utils/Shift.js'
 import { View } from 'react-native'
-//import Canvas from 'react-native-canvas' // has error
-import { Video, AVPlaybackStatus } from 'expo-av' // does not paint with Paint()
+import { Video, AVPlaybackStatus } from 'expo-av'
 import { Camera } from 'expo-camera'
 
 const Vid = (props) => {
