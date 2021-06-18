@@ -9,6 +9,7 @@ const Vid = (props) => {
 	const Algorithm = parseInt(props.Algorithm, 10)
 	const Plat = props.Platform
 	console.log('Algorithm: ' + Algorithm)
+	console.log('Camera use: ' + props.useCam)
 
 	if (Plat != 'Mobile') {
 		//Web
@@ -92,8 +93,6 @@ const Vid = (props) => {
 	} else {
 		//Mobile:
 		const [hasPermission, setHasPermission] = useState(null)
-		const [type, setType] = useState(Camera.Constants.Type.back)
-
 		useEffect(() => {
 			;(async () => {
 				const { status } = await Camera.requestPermissionsAsync()
@@ -109,7 +108,12 @@ const Vid = (props) => {
 		}
 		return (
 			<View>
-				<Camera type={type}></Camera>
+				<Camera
+					type={
+						props.useCam
+							? Camera.Constants.Type.front
+							: Camera.Constants.Type.back
+					}></Camera>
 			</View>
 		)
 	}

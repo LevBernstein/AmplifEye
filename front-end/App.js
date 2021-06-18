@@ -1,14 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import {
-	StyleSheet,
-	Text,
-	View,
-	TextInput,
-	Button,
-	SafeAreaView
-} from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button, Switch } from 'react-native'
 import getPlatform from './utils/Platform.js'
 import Vid from './components/Camera.js'
 
@@ -18,6 +11,7 @@ export default function App() {
 	const [email, setEmail] = useState('')
 	const [pass, setPass] = useState('')
 	const [showGUI, setShowGUI] = useState(false)
+	const [camSwitch, setCamSwitch] = useState(false) // false = personal (front) camera; true = environment (back) camera
 	const platform = getPlatform()
 	console.log(platform)
 
@@ -63,6 +57,16 @@ export default function App() {
 					<Text>{'\n'}Algorithm: </Text>
 					<TextInput autoCorrect={false} value={alg} onChangeText={setAlg} />
 				</View>
+				<View style={{ display: platform == 'Mobile' ? '' : 'none' }}>
+					<Text>{'\n'}Camera: </Text>
+					<Switch
+						trackColor={{ false: '#FF0000', true: '#00FF00' }}
+						thumbColor={camSwitch ? '#000000' : '#FFFFFF'}
+						ios_backgroundColor="#3e3e3e"
+						onValueChange={setCamSwitch}
+						value={camSwitch}
+					/>
+				</View>
 				<Text>{'\n'}</Text>
 				<Button title="Save" onPress={(e) => handleSubmit(e)} />
 			</View>
@@ -70,7 +74,12 @@ export default function App() {
 				className="Video"
 				onClick={handleClick}
 				style={{ display: showGUI ? 'none' : '' }}>
-				<Vid disp={showGUI} Algorithm={alg} Platform={platform} />
+				<Vid
+					disp={showGUI}
+					Algorithm={alg}
+					Platform={platform}
+					useCam={camSwitch}
+				/>
 			</View>
 		</View>
 	)
