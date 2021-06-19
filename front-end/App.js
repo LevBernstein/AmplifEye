@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, Switch } from 'react-native'
 import getPlatform from './utils/Platform.js'
 import Vid from './components/Camera.js'
+import MobileVid from './components/MobileCamera.js'
 
 export default function App() {
 	const [alg, setAlg] = useState('0') //TODO: algorithm encoded based on "prescription", re-render video with changed alg.
@@ -57,7 +58,7 @@ export default function App() {
 					<Text>{'\n'}Algorithm: </Text>
 					<TextInput autoCorrect={false} value={alg} onChangeText={setAlg} />
 				</View>
-				<View style={{ display: platform == 'Mobile' ? '' : 'none' }}>
+				<View style={{ display: platform === 'Mobile' ? '' : 'none' }}>
 					<Text>{'\n'}Camera: </Text>
 					<Switch
 						trackColor={{ false: '#FF0000', true: '#00FF00' }}
@@ -74,12 +75,11 @@ export default function App() {
 				className="Video"
 				onClick={handleClick}
 				style={{ display: showGUI ? 'none' : '' }}>
-				<Vid
-					disp={showGUI}
-					Algorithm={alg}
-					Platform={platform}
-					useCam={camSwitch}
-				/>
+				{platform !== 'Mobile' ? (
+					<Vid Algorithm={alg} />
+				) : (
+					<MobileVid Algorithm={alg} useCam={camSwitch} />
+				)}
 			</View>
 		</View>
 	)
